@@ -21,6 +21,8 @@ module.exports =
             })
     },
     createUser: (args) => {
+        // email is already in use or no we can check here 
+        //But in this we have added the validation in mongose table..
         return bcrypt.hash(args.userInput.password, 12)
             .then(hashedPassword => {
                 const user = new User({
@@ -32,7 +34,7 @@ module.exports =
                     .save()
                     .then(result => {
                         console.log(result);
-                        return { ...result._doc };
+                        return { ...result._doc,password: null };
                     }).catch(err => {
                         console.log(err)
                         return err
