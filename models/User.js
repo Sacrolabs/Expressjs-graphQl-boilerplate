@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Post = require('./Post')
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -6,6 +7,10 @@ const userSchema = new mongoose.Schema({
         require: false
     },
     name: {
+        type: String,
+        require: true
+    },
+    password: {
         type: String,
         require: true
     },
@@ -18,6 +23,12 @@ const userSchema = new mongoose.Schema({
             "please enter a vaild email"
         ]
     },
+    createdEvents: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'post'
+        }
+    ]
 },
     { timestamps: true }
 )
